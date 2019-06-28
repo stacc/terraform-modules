@@ -1,0 +1,4 @@
+.terraform
+beconf.tfvars
+.git
+terraform.txt
