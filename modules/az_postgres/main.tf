@@ -50,18 +50,18 @@ resource "azurerm_postgresql_database" "grafana" {
   collation           = "English_United States.1252"
 }
 
-resource "random_string" "password" {
-  length           = 16
-  special          = true
-  override_special = "/@\" "
-}
-
-resource "kubernetes_secret" "example" {
+resource "kubernetes_secret" "database_secret" {
   metadata {
-    name = "${var.name}-db-postgres"
+    name = "${var.name}-${var.environment}-db-postgres"
   }
   data = {
     password = "${random_string.password.result}"
   }
   type = "Opaque"
+}
+
+resource "random_string" "password" {
+  length           = 16
+  special          = true
+  override_special = "/@\" "
 }
