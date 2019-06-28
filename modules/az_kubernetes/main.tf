@@ -35,8 +35,8 @@ resource "azurerm_kubernetes_cluster" "kubernetes" {
 
   agent_pool_profile {
     name            = "default"
-    count           = 2
-    vm_size         = "Standard_DS3_v2"
+    count           = "${var.node_count}"
+    vm_size         = "${var.node_type}"
     os_type         = "Linux"
     os_disk_size_gb = 32
     max_pods        = 250

@@ -13,6 +13,16 @@ variable "location" {
   default     = "West Europe"
 }
 
+variable "node_count" {
+  description = "Number of nodes"
+  default     = "2"
+}
+
+variable "node_type" {
+  description = "The type of nodes"
+  default     = "Standard_DS3_v2"
+}
+
 variable "resource_group" {
   description = "The resource group for the Azure Kubernetes Service to be created in"
 }
