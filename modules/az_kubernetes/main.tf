@@ -1,11 +1,11 @@
 module "aks_rbac" {
-  source      = "../../modules/aks_rbac"
+  source      = "../../modules/az_aks_rbac"
   name        = "${var.name}"
   environment = "${var.environment}"
 }
 
 module "service-principle" {
-  source  = "../../modules/service-principle"
+  source  = "../../modules/az_service-principle"
   sp_name = "${var.name}-${var.environment}"
 }
 
