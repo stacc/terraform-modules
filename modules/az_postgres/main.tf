@@ -14,8 +14,8 @@ resource "azurerm_postgresql_virtual_network_rule" "vnet_rule" {
   ignore_missing_vnet_service_endpoint = true
 }
 
-resource "azurerm_postgresql_virtual_network_rule" "azure_svc_rule" {
-  name                = "allow-all-azure-ips-vnet-rule"
+resource "azurerm_postgresql_firewall_rule" "azure_svc_rule" {
+  name                = "allow-all-azure-ips-fw-rule"
   resource_group_name = "${var.resource_group.name}"
   server_name         = "${azurerm_postgresql_server.server.name}"
   start_ip_address    = "0.0.0.0"
