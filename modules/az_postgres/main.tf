@@ -55,3 +55,13 @@ resource "random_string" "password" {
   special          = true
   override_special = "/@\" "
 }
+
+resource "kubernetes_secret" "example" {
+  metadata {
+    name = "${var.name}-db-postgres"
+  }
+  data = {
+    password = "${random_string.password.result}"
+  }
+  type = "Opaque"
+}
