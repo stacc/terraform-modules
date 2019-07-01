@@ -20,6 +20,6 @@ resource "azurerm_cosmosdb_account" "db" {
   }
 
   tags = {
-    Environment = "${var.environment}"
+    environment = "${var.environment}"
   }
 }

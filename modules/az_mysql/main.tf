@@ -1,6 +1,10 @@
 resource "azurerm_resource_group" "mysql" {
   name     = "${var.name}-${var.environment}-rg"
   location = "${var.location}"
+
+  tags = {
+    environment = "${var.environment}"
+  }
 }
 
 resource "azurerm_virtual_network" "mysqlvnet" {
@@ -8,6 +12,10 @@ resource "azurerm_virtual_network" "mysqlvnet" {
   location            = "${azurerm_resource_group.mysql.location}"
   resource_group_name = "${azurerm_resource_group.mysql.name}"
   address_space       = ["10.2.0.0/16"]
+
+  tags = {
+    environment = "${var.environment}"
+  }
 }
 
 resource "azurerm_subnet" "mysqlsubnet" {
@@ -41,6 +49,10 @@ resource "azurerm_mysql_server" "mysql" {
   administrator_login_password = "H@Sh1CoR3!"
   version                      = "5.7"
   ssl_enforcement              = "Enabled"
+
+  tags = {
+    environment = "${var.environment}"
+  }
 }
 
 resource "azurerm_mysql_database" "mysql" {

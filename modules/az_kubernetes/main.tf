@@ -63,7 +63,7 @@ resource "azurerm_kubernetes_cluster" "kubernetes" {
   }
 
   tags = {
-    Environment = "${var.environment}"
+    environment = "${var.environment}"
   }
 
   depends_on = ["azurerm_subnet.kubesubnet"]
