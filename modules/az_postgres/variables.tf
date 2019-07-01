@@ -13,3 +13,7 @@ variable "environment" {
 variable "vnet" {
   description = "The virtual network postgres will be created in"
 }
+variable "kubernetes_cluster" {
+  
+}
+
