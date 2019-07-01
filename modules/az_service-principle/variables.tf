@@ -1,3 +1,3 @@
-variable "sp_name" {
-  default = "test-sp"
+variable "name" {
+  default = "stacc"
 }

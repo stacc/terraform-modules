@@ -35,7 +35,7 @@ ef54d2bf-783f-4e0f-bca1-3210c0444d99 Read and write calendars in all mailboxes
 */
 
 resource "azuread_application" "application" {
-  name = "${var.sp_name}"
+  name = "${var.name}-sp"
 }
 
 resource "azuread_service_principal" "service_principal" {
