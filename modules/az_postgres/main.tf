@@ -61,10 +61,10 @@ resource "azurerm_postgresql_database" "grafana" {
 provider "kubernetes" {
   version                = "1.7"
   load_config_file       = false
-  host                   = "${kubernetes_cluster.kube_admin_config.0.host}"
-  client_certificate     = "${base64decode(kubernetes_cluster.kube_admin_config.0.client_certificate)}"
-  client_key             = "${base64decode(kubernetes_cluster.kube_admin_config.0.client_key)}"
-  cluster_ca_certificate = "${base64decode(kubernetes_cluster.kube_admin_config.0.cluster_ca_certificate)}"
+  host                   = "${var.kubernetes_cluster.kube_admin_config.0.host}"
+  client_certificate     = "${base64decode(var.kubernetes_cluster.kube_admin_config.0.client_certificate)}"
+  client_key             = "${base64decode(var.kubernetes_cluster.kube_admin_config.0.client_key)}"
+  cluster_ca_certificate = "${base64decode(var.kubernetes_cluster.kube_admin_config.0.cluster_ca_certificate)}"
 }
 
 resource "kubernetes_secret" "database_secret" {
