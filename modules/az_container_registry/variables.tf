@@ -11,3 +11,8 @@ variable "location" {
 variable "environment" {
   default = "global"
 }
+
+variable "cr_name" {
+  description = "The name of the container registry"
+  default     = "stacc"
+}
