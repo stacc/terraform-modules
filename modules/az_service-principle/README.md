@@ -1,14 +1,14 @@
 # App ID
-AAD Graph API 	https://graph.windows.net/ 	00000002-0000-0000-c000-000000000000
-Office 365 Exchange Online 	https://outlook-sdf.office.com/ 	00000002-0000-0ff1-ce00-000000000000
-Microsoft Graph 	https://graph.microsoft.com 	00000003-0000-0000-c000-000000000000
-Skype for Business Online 	https://api.skypeforbusiness.com/ 	00000004-0000-0ff1-ce00-000000000000
-Office 365 Yammer 	https://api.yammer.com/ 	00000005-0000-0ff1-ce00-000000000000
-OneNote 	https://onenote.com/ 	2d4d3d8e-2be3-4bef-9f87-7875a61c29de
-Windows Azure Service Management API 	https://management.core.windows.net/ 	797f4846-ba00-4fd7-ba43-dac1f8f63013
-Office 365 Management APIs 	https://manage.office.com 	c5393580-f805-4401-95e8-94b7a6ef2fc2
-Microsoft Teams Services 	https://api.spaces.skype.com/ 	cc15fd57-2c6c-4117-a88c-83b1d56b4bbe
-Azure Key Vault 	https://vault.azure.net 	cfa8b339-82a2-471a-a3c9-0fc0be7a4093
+* AAD Graph API 	https://graph.windows.net/ 	00000002-0000-0000-c000-000000000000
+* Office 365 Exchange Online 	https://outlook-sdf.office.com/ 	00000002-0000-0ff1-ce00-000000000000
+* Microsoft Graph 	https://graph.microsoft.com 	00000003-0000-0000-c000-000000000000
+* Skype for Business Online 	https://api.skypeforbusiness.com/ 	00000004-0000-0ff1-ce00-000000000000
+* Office 365 Yammer 	https://api.yammer.com/ 	00000005-0000-0ff1-ce00-000000000000
+* OneNote 	https://onenote.com/ 	2d4d3d8e-2be3-4bef-9f87-7875a61c29de
+* Windows Azure Service Management API 	https://management.core.windows.net/ 	797f4846-ba00-4fd7-ba43-dac1f8f63013
+* Office 365 Management APIs 	https://manage.office.com 	c5393580-f805-4401-95e8-94b7a6ef2fc2
+* Microsoft Teams Services 	https://api.spaces.skype.com/ 	cc15fd57-2c6c-4117-a88c-83b1d56b4bbe
+* Azure Key Vault 	https://vault.azure.net 	cfa8b339-82a2-471a-a3c9-0fc0be7a4093
 
 # Access ID
 
