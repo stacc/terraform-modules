@@ -58,6 +58,9 @@ resource "azurerm_postgresql_database" "grafana" {
   collation           = "English_United States.1252"
 }
 
+provider "kubernetes" {
+}
+
 resource "kubernetes_secret" "database_secret" {
   metadata {
     name = "${var.name}-${var.environment}-db-postgres"
