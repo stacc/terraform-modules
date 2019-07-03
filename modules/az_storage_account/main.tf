@@ -2,7 +2,7 @@ provider "azurerm" {
   version = "~>1.29"
 }
 
-resource "azurerm_resource_group" "rg" {
+resource "azurerm_resource_group" "resource_group" {
   name     = "${var.name}-${var.environment}-sa-rg"
   location = "${var.location}"
 
@@ -11,9 +11,9 @@ resource "azurerm_resource_group" "rg" {
   }
 }
 
-resource "azurerm_storage_account" "sa" {
+resource "azurerm_storage_account" "storage_account" {
   name                     = "${var.sa_name}"
-  resource_group_name      = "${azurerm_resource_group.rg.name}"
+  resource_group_name      = "${azurerm_resource_group.resource_group.name}"
   location                 = "${var.location}"
   account_tier             = "Standard"
   account_replication_type = "LRS"
@@ -22,9 +22,9 @@ resource "azurerm_storage_account" "sa" {
     environment = "${var.environment}"
   }
 }
-resource "azurerm_storage_container" "sc" {
+resource "azurerm_storage_container" "storage_container" {
   name                  = "${var.name}-${var.environment}-sc"
-  resource_group_name   = "${azurerm_resource_group.rg.name}"
-  storage_account_name  = "${azurerm_storage_account.sa.name}"
+  resource_group_name   = "${azurerm_resource_group.resource_group.name}"
+  storage_account_name  = "${azurerm_storage_account.storage_account.name}"
   container_access_type = "private"
 }
