@@ -2,8 +2,8 @@ provider "azurerm" {
   version = "~>1.29"
 }
 
-resource "azurerm_resource_group" "tf_rg" {
-  name     = "${var.name}-tf-rg"
+resource "azurerm_resource_group" "rg" {
+  name     = "${var.name}-${var.environment}-rg"
   location = "${var.location}"
 
   tags = {
@@ -11,9 +11,9 @@ resource "azurerm_resource_group" "tf_rg" {
   }
 }
 
-resource "azurerm_storage_account" "tf_sa" {
+resource "azurerm_storage_account" "sa" {
   name                     = "${var.sa_name}"
-  resource_group_name      = "${azurerm_resource_group.tf_rg.name}"
+  resource_group_name      = "${azurerm_resource_group.rg.name}"
   location                 = "${var.location}"
   account_tier             = "Standard"
   account_replication_type = "LRS"
@@ -22,9 +22,9 @@ resource "azurerm_storage_account" "tf_sa" {
     environment = "${var.environment}"
   }
 }
-resource "azurerm_storage_container" "tf_sc" {
-  name                  = "${var.name}-tf-sc"
-  resource_group_name   = "${azurerm_resource_group.tf_rg.name}"
-  storage_account_name  = "${azurerm_storage_account.tf_sa.name}"
+resource "azurerm_storage_container" "sc" {
+  name                  = "${var.name}-${var.environment}-sc"
+  resource_group_name   = "${azurerm_resource_group.rg.name}"
+  storage_account_name  = "${azurerm_storage_account.sa.name}"
   container_access_type = "private"
 }
