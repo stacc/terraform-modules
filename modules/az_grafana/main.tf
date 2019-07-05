@@ -32,7 +32,7 @@ resource "azuread_service_principal_password" "grafana_client_password" {
 
 resource "random_string" "application_client_password" {
   length  = 16
-  special = true
+  special = false
 
   keepers = {
     service_principal = "${azuread_service_principal.grafana_client.id}"
