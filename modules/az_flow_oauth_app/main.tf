@@ -17,11 +17,11 @@ resource "azuread_application" "flow" {
 }
 
 resource "azuread_service_principal" "flow_client" {
-  application_id = "${azuread_application.grafana.application_id}"
+  application_id = "${azuread_application.flow.application_id}"
 }
 
 resource "azuread_service_principal_password" "flow_client_password" {
-  service_principal_id = "${azuread_service_principal.grafana_client.id}"
+  service_principal_id = "${azuread_service_principal.flow.id}"
   value                = "${random_string.application_client_password.result}"
   end_date             = "${timeadd(timestamp(), "87600h")}" # 10 years
 
@@ -35,6 +35,6 @@ resource "random_string" "application_client_password" {
   special = true
 
   keepers = {
-    service_principal = "${azuread_service_principal.grafana_client.id}"
+    service_principal = "${azuread_service_principal.flow_client.id}"
   }
 }
