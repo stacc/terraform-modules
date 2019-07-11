@@ -1,52 +1,46 @@
-resource "azurerm_resource_group" "mysql" {
-  name     = "${var.name}-${var.environment}-rg"
-  location = "${var.location}"
-
-  tags = {
-    environment = "${var.environment}"
-  }
-}
-
-resource "azurerm_virtual_network" "mysqlvnet" {
-  name                = "mysql-vnet"
-  location            = "${azurerm_resource_group.mysql.location}"
-  resource_group_name = "${azurerm_resource_group.mysql.name}"
-  address_space       = ["10.2.0.0/16"]
-
-  tags = {
-    environment = "${var.environment}"
-  }
-}
-
 resource "azurerm_subnet" "mysqlsubnet" {
   name                 = "mysqlsubnet"
-  resource_group_name  = "${azurerm_resource_group.mysql.name}"
-  address_prefix       = "10.2.0.0/24"
-  virtual_network_name = "${azurerm_virtual_network.mysqlvnet.name}"
+  resource_group_name  = "${var.resource_group.name}"
+  address_prefix       = "10.1.129.0/24"
+  virtual_network_name = "${var.vnet.name}"
   service_endpoints    = ["Microsoft.Sql"]
+}
+
+resource "azurerm_mysql_virtual_network_rule" "vnetrule" {
+  name                = "mysql-vnet-rule"
+  resource_group_name = "${var.resource_group.name}"
+  server_name         = "${azurerm_mysql_server.mysql.name}"
+  subnet_id           = "${azurerm_subnet.mysqlsubnet.id}"
+}
+
+resource "azurerm_mysql_firewall_rule" "azure_svc_rule" {
+  name                = "allow-all-azure-ips-fw-rule"
+  resource_group_name = "${var.resource_group.name}"
+  server_name         = "${azurerm_mysql_server.mysql.name}"
+  start_ip_address    = "0.0.0.0"
+  end_ip_address      = "0.0.0.0"
 }
 
 resource "azurerm_mysql_server" "mysql" {
   name                = "${var.name}-${var.environment}-server-1"
-  location            = "${azurerm_resource_group.mysql.location}"
-  resource_group_name = "${azurerm_resource_group.mysql.name}"
+  location            = "${var.resource_group.location}"
+  resource_group_name = "${var.resource_group.name}"
 
   sku {
-    name     = "GP_Gen5_2"
+    name     = "${var.database_type}"
     capacity = 2
     tier     = "GeneralPurpose"
     family   = "Gen5"
-
   }
 
   storage_profile {
-    storage_mb            = 5120
+    storage_mb            = "${var.database_storage}"
     backup_retention_days = 7
     geo_redundant_backup  = "Disabled"
   }
 
-  administrator_login          = "mysqladminun"
-  administrator_login_password = "H@Sh1CoR3!"
+  administrator_login          = "staccadmin"
+  administrator_login_password = "${random_string.password.result}"
   version                      = "5.7"
   ssl_enforcement              = "Enabled"
 
@@ -55,17 +49,35 @@ resource "azurerm_mysql_server" "mysql" {
   }
 }
 
-resource "azurerm_mysql_database" "mysql" {
-  name                = "db"
-  resource_group_name = "${azurerm_resource_group.mysql.name}"
+resource "azurerm_mysql_database" "databases" {
+  count               = length(var.database_names)
+  name                = "${var.database_names[count.index]}"
+  resource_group_name = "${var.resource_group.name}"
   server_name         = "${azurerm_mysql_server.mysql.name}"
   charset             = "utf8"
   collation           = "utf8_unicode_ci"
 }
 
-resource "azurerm_mysql_virtual_network_rule" "vnetrule" {
-  name                = "mysql-vnet-rule"
-  resource_group_name = "${azurerm_resource_group.mysql.name}"
-  server_name         = "${azurerm_mysql_server.mysql.name}"
-  subnet_id           = "${azurerm_subnet.mysqlsubnet.id}"
+provider "kubernetes" {
+  version                = "1.7"
+  load_config_file       = false
+  host                   = "${var.kubernetes_cluster.kube_admin_config.0.host}"
+  client_certificate     = "${base64decode(var.kubernetes_cluster.kube_admin_config.0.client_certificate)}"
+  client_key             = "${base64decode(var.kubernetes_cluster.kube_admin_config.0.client_key)}"
+  cluster_ca_certificate = "${base64decode(var.kubernetes_cluster.kube_admin_config.0.cluster_ca_certificate)}"
+}
+
+resource "kubernetes_secret" "database_secret" {
+  metadata {
+    name = "${var.name}-${var.environment}-db-mysql"
+  }
+  data = {
+    password = "${random_string.password.result}"
+  }
+  type = "Opaque"
+}
+
+resource "random_string" "password" {
+  length  = 16
+  special = false
 }
