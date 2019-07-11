@@ -70,6 +70,12 @@ resource "azurerm_kubernetes_cluster" "kubernetes" {
 }
 data "azurerm_client_config" "client_config" {}
 
+resource "azurerm_role_assignment" "public_ip" {
+  principal_id         = "${data.azurerm_client_config.client_config.service_principal_object_id}"
+  role_definition_name = "Network Contributor"
+  scope                = "${var.resource_group.id}"
+}
+
 resource "azurerm_role_assignment" "aks" {
   principal_id         = "${data.azurerm_client_config.client_config.service_principal_object_id}"
   role_definition_name = "Network Contributor"
