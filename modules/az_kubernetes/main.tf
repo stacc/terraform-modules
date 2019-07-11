@@ -6,7 +6,7 @@ module "aks_rbac" {
 
 module "service-principle" {
   source  = "../../modules/az_service-principle"
-  sp_name = "${var.name}-${var.environment}-k8s"
+  name = "${var.name}-${var.environment}-k8s"
 }
 
 resource "azurerm_subnet" "kubesubnet" {

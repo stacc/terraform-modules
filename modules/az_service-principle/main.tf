@@ -11,7 +11,7 @@ provider "random" {
 }
 
 resource "azuread_application" "application" {
-  name = "${var.name}-sp"
+  name = "${var.name}"
 }
 
 resource "azuread_service_principal" "service_principal" {
