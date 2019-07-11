@@ -26,6 +26,5 @@ resource "azuread_service_principal_password" "service_principal_password" {
 
 resource "random_string" "password" {
   length           = 16
-  special          = true
-  override_special = "/@\" "
+  special          = false
 }
