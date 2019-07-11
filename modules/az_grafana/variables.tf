@@ -7,3 +7,7 @@ variable "environment" {
   description = "The environment of the resources"
   default     = "test-1"
 }
+
+variable "reply_urls" {
+
+}

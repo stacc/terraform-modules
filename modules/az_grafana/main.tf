@@ -1,6 +1,6 @@
 resource "azuread_application" "grafana" {
   name       = "${var.name}-${var.environment}_grafana_client"
-  reply_urls = ["https://grafana.${var.name}-${var.environment}-k8s.staccflow.com/login/generic_oauth"]
+  reply_urls = "${var.reply_urls}"
   type       = "webapp/api"
 
   required_resource_access {
