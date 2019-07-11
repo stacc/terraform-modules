@@ -43,7 +43,7 @@ resource "azuread_service_principal_password" "client" {
 
 resource "random_string" "application_client_password" {
   length  = 16
-  special = true
+  special = false
 
   keepers = {
     service_principal = "${azuread_service_principal.client.id}"
@@ -105,7 +105,7 @@ resource "azuread_service_principal_password" "server" {
 
 resource "random_string" "application_server_password" {
   length  = 16
-  special = true
+  special = false
 
   keepers = {
     service_principal = "${azuread_service_principal.server.id}"
