@@ -22,7 +22,7 @@ resource "azurerm_mysql_firewall_rule" "azure_svc_rule" {
 }
 
 resource "azurerm_mysql_server" "mysql" {
-  name                = "${var.name}-${var.environment}-server-1"
+  name                = "${var.name}-${var.environment}-db-mysql"
   location            = "${var.resource_group.location}"
   resource_group_name = "${var.resource_group.name}"
 
