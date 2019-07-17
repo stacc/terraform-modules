@@ -8,7 +8,7 @@ output "access_key" {
 }
 
 output "container_name" {
-  value = "${azurerm_storage_container.storage_container.name}"
+  value = "${azurerm_storage_container.storage_container.*.name}"
 }
 
 output "primary_connection_string" {

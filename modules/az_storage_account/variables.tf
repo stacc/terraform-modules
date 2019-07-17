@@ -19,3 +19,7 @@ variable "rg_name" {
   description = "The resource group the storage account will be created in"
   default = "stacc-global-sa-rg"
 }
+
+variable "storage_containers" {
+  description = "A list of containers to be created"
+}
