@@ -13,6 +13,16 @@ variable "location" {
   default     = "West Europe"
 }
 
+variable "kubernetes_version" {
+  description = "Kubernetes version"
+  default     = "1.13.8"
+}
+
+variable "os_disk_size_gb" {
+  description = "OS disk size"
+  default     = "32"
+}
+
 variable "node_count" {
   description = "Number of nodes"
   default     = "2"

@@ -31,14 +31,14 @@ resource "azurerm_kubernetes_cluster" "kubernetes" {
   location            = "${var.resource_group.location}"
   resource_group_name = "${var.resource_group.name}"
   dns_prefix          = "${var.name}-${var.environment}"
-  kubernetes_version  = "1.13.5"
+  kubernetes_version  = "${var.kubernetes_version}"
 
   agent_pool_profile {
     name            = "default"
     count           = "${var.node_count}"
     vm_size         = "${var.node_type}"
     os_type         = "Linux"
-    os_disk_size_gb = 32
+    os_disk_size_gb = "${var.os_disk_size_gb}"
     max_pods        = 250
 
     vnet_subnet_id = "${azurerm_subnet.kubesubnet.id}"
