@@ -35,5 +35,5 @@ variable "database_capacity" {
 variable "database_names" {
   description = "List of the database names"
   type        = list(string)
-  default     = ["grafana", "prod"]
+  default     = ["grafana", "test"]
 }
