@@ -28,14 +28,14 @@ resource "azurerm_postgresql_server" "server" {
   resource_group_name = "${var.resource_group.name}"
 
   sku {
-    name     = "GP_Gen5_2"
-    capacity = 2
+    name     = "${var.database_type}"
+    capacity = "${var.database_capacity}"
     tier     = "GeneralPurpose"
     family   = "Gen5"
   }
 
   storage_profile {
-    storage_mb            = 5120
+    storage_mb            = "${var.database_storage}"
     backup_retention_days = 7
     geo_redundant_backup  = "Disabled"
   }
@@ -50,8 +50,9 @@ resource "azurerm_postgresql_server" "server" {
   }
 }
 
-resource "azurerm_postgresql_database" "grafana" {
-  name                = "grafana"
+resource "azurerm_postgresql_database" "databases" {
+  count               = length(var.database_names)
+  name                = "${var.database_names[count.index]}"
   resource_group_name = "${var.resource_group.name}"
   server_name         = "${azurerm_postgresql_server.server.name}"
   charset             = "UTF8"
@@ -78,7 +79,6 @@ resource "kubernetes_secret" "database_secret" {
 }
 
 resource "random_string" "password" {
-  length           = 16
-  special          = true
-  override_special = "/@\" "
+  length  = 16
+  special = false
 }
