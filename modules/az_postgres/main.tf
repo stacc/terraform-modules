@@ -42,7 +42,7 @@ resource "azurerm_postgresql_server" "server" {
 
   administrator_login          = "staccadmin"
   administrator_login_password = "${random_string.password.result}"
-  version                      = "9.5"
+  version                      = "${var.database_version}"
   ssl_enforcement              = "Enabled"
 
   tags = {

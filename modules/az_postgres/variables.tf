@@ -17,6 +17,12 @@ variable "kubernetes_cluster" {
 
 }
 
+variable "database_version" {
+  description = "The version of postgres"
+  default     = "9.6"
+}
+
+
 variable "database_type" {
   description = "The type of database server"
   default     = "GP_Gen5_2"
@@ -29,7 +35,7 @@ variable "database_storage" {
 
 variable "database_capacity" {
   description = "Number of CPU's for the database server"
-  default = 2
+  default     = 2
 }
 
 variable "database_names" {
