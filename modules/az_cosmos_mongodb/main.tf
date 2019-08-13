@@ -13,6 +13,11 @@ resource "azurerm_cosmosdb_account" "account" {
     max_staleness_prefix    = "${var.max_staleness_prefix}"
   }
 
+  geo_location {
+    location          = "${var.failover_location}"
+    failover_priority = 0
+  }
+
   tags = {
     environment = "${var.environment}"
   }

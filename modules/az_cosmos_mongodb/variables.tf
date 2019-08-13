@@ -38,3 +38,7 @@ variable "database_names" {
 variable "unique_key" {
   default     = "uniqueKey"
 }
+
+variable "failover_location" {
+  
+}
