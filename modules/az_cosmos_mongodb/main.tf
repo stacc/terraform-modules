@@ -33,10 +33,10 @@ resource "azurerm_cosmosdb_mongo_collection" "collection" {
   database_name       = "${azurerm_cosmosdb_mongo_database.example.name}"
 
   default_ttl_seconds = "-1"
-  shard_key           = "${var.unique.key}"
+  shard_key           = "${var.unique_key}"
 
   indexes {
-    key    = "${var.unique.key}"
+    key    = "${var.unique_key}"
     unique = true
   }
 }

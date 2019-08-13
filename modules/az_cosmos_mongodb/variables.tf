@@ -35,6 +35,6 @@ variable "database_names" {
   default     = ["test"]
 }
 
-variable "var.unique.key" {
+variable "unique_key" {
   default     = "uniqueKey"
 }
