@@ -29,6 +29,11 @@ variable "max_staleness_prefix" {
   default     = 200
 }
 
+variable "account_name_suffix" {
+  description = "Suffix of account name"
+  default     = ""
+}
+
 variable "database_names" {
   description = "List of the database names"
   type        = list(string)
@@ -40,5 +45,5 @@ variable "unique_key" {
 }
 
 variable "failover_location" {
-  
+
 }
