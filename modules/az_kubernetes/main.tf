@@ -41,9 +41,9 @@ resource "azurerm_kubernetes_cluster" "kubernetes" {
     os_disk_size_gb     = "${var.os_disk_size_gb}"
     max_pods            = 250
 
-    enable_auto_scaling = ${var.agent_pool_profile_enable_auto_scaling} 
-    min_count           = ${var.agent_pool_profile_min_count}
-    max_count           = ${var.agent_pool_profile_max_count}
+    enable_auto_scaling = "${var.agent_pool_profile_enable_auto_scaling}"
+    min_count           = "${var.agent_pool_profile_min_count}"
+    max_count           = "${var.agent_pool_profile_max_count}"
     type                = "${var.agent_pool_profile_type}"
     
     vnet_subnet_id = "${azurerm_subnet.kubesubnet.id}"
