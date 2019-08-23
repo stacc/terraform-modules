@@ -53,3 +53,6 @@ variable "agent_pool_profile_max_count" {
 variable "agent_pool_profile_type" {
   default = "AvailabilitySet"
 }
+variable "agent_pool_profile_enable_auto_scaling" {
+  default = true
+}
