@@ -44,3 +44,12 @@ variable "public_ip_rg" {
 variable "vnet" {
   description = "The virtual network for the Azure Kubernetes Service to be created in"
 }
+variable "agent_pool_profile_min_count" {
+  default = 3
+}
+variable "agent_pool_profile_max_count" {
+  default = 7
+}
+variable "agent_pool_profile_type" {
+  default = "AvailabilitySet"
+}
