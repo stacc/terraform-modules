@@ -56,3 +56,6 @@ variable "agent_pool_profile_type" {
 variable "agent_pool_profile_enable_auto_scaling" {
   default = true
 }
+variable "max_pods" {
+  default = 256
+}

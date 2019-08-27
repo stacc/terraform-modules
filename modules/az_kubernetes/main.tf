@@ -39,7 +39,7 @@ resource "azurerm_kubernetes_cluster" "kubernetes" {
     vm_size             = "${var.node_type}"
     os_type             = "Linux"
     os_disk_size_gb     = "${var.os_disk_size_gb}"
-    max_pods            = 250
+    max_pods            = "${var.max_pods}"
 
     enable_auto_scaling = "${var.agent_pool_profile_enable_auto_scaling}"
     min_count           = "${var.agent_pool_profile_min_count}"
