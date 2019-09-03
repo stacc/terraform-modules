@@ -12,6 +12,7 @@ module "service-principle" {
 resource "azurerm_subnet" "kubesubnet" {
   name                 = "${var.name}-${var.environment}-k8s"
   resource_group_name  = "${var.resource_group.name}"
+  # (number of nodes + 1) + ((number of nodes + 1) * maximum pods per node that you configure)
   address_prefix       = "10.1.0.0/17"
   virtual_network_name = "${var.vnet.name}"
 }
