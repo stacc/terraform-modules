@@ -79,6 +79,9 @@ resource "kubernetes_secret" "database_secret" {
 }
 
 resource "random_string" "password" {
-  length  = 16
+  length      = 16
+  min_lower   = 1
+  min_numeric = 1
+  min_upper   = 1
   special = false
 }
