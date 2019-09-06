@@ -48,5 +48,5 @@ variable "failover_location" {
 
 }
 variable "var_capabilities_EnableAggregationPipeline" {
-  default = true;
+  default = true
 }
