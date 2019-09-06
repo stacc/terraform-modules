@@ -8,7 +8,7 @@ resource "azurerm_cosmosdb_account" "account" {
   enable_automatic_failover = "${var.enable_automatic_failover}"
 
   capabilities {
-    EnableAggregationPipeline = "${var.capabilities_EnableAggregationPipeline}"
+    name = "${var.capabilities}"
   }
 
   consistency_policy {
