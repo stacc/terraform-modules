@@ -47,3 +47,6 @@ variable "unique_key" {
 variable "failover_location" {
 
 }
+variable "var_capabilities_EnableAggregationPipeline" {
+  default = true;
+}

@@ -7,6 +7,10 @@ resource "azurerm_cosmosdb_account" "account" {
 
   enable_automatic_failover = "${var.enable_automatic_failover}"
 
+  capabilities {
+    EnableAggregationPipeline = "${var_capabilities_EnableAggregationPipeline}"
+  }
+
   consistency_policy {
     consistency_level       = "${var.consistency_level}"
     max_interval_in_seconds = "${var.max_interval_in_seconds}"
