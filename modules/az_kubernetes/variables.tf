@@ -44,18 +44,29 @@ variable "public_ip_rg" {
 variable "vnet" {
   description = "The virtual network for the Azure Kubernetes Service to be created in"
 }
+
+variable "subnet_address_prefix" {
+  # (number of nodes + 1) + ((number of nodes + 1) * maximum pods per node that you configure)
+  description = "The address prefix of the subnet"
+  default = "10.1.0.0/17"
+}
+
 variable "agent_pool_profile_min_count" {
   default = 3
 }
+
 variable "agent_pool_profile_max_count" {
   default = 7
 }
+
 variable "agent_pool_profile_type" {
   default = "AvailabilitySet"
 }
+
 variable "agent_pool_profile_enable_auto_scaling" {
   default = true
 }
+
 variable "max_pods" {
   default = 256
 }
