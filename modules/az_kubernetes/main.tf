@@ -50,8 +50,6 @@ resource "azurerm_kubernetes_cluster" "kubernetes" {
     count = "${var.agent_pool_profile_count}"
 
     enable_auto_scaling = "${var.agent_pool_profile_enable_auto_scaling}"
-    min_count           = "${var.agent_pool_profile_min_count}"
-    max_count           = "${var.agent_pool_profile_max_count}"
 
     vnet_subnet_id = "${azurerm_subnet.kubesubnet.id}"
   }
