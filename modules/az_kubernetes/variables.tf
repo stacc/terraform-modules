@@ -69,5 +69,5 @@ variable "max_pods" {
 variable "service_endpoints" {
   description = "List of service endpoints"
   type        = list(string)
-  default     = [""]
+  default     = []
 }
