@@ -14,6 +14,8 @@ resource "azurerm_subnet" "kubesubnet" {
   resource_group_name  = "${var.resource_group.name}"
   address_prefix       = "${var.subnet_address_prefix}"
   virtual_network_name = "${var.vnet.name}"
+
+  service_endpoints    = "${var.service_endpoints}"
 }
 
 locals {
