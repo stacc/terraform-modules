@@ -36,7 +36,7 @@ resource "azurerm_kubernetes_cluster" "kubernetes" {
   kubernetes_version  = "${var.kubernetes_version}"
 
   lifecycle {
-    ignore_changes = var.agent_pool_profile_enable_auto_scaling ? ["agent_pool_profile.0.count"] : []
+    ignore_changes = [ "agent_pool_profile.count" ]
   }
 
   agent_pool_profile {
