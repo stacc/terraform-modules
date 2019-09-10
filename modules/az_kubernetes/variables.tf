@@ -65,6 +65,7 @@ variable "agent_pool_profile_enable_auto_scaling" {
 variable "max_pods" {
   default = 100
 }
+
 variable "service_endpoints" {
   description = "List of service endpoints"
   type        = list(string)
