@@ -35,7 +35,6 @@ resource "azurerm_kubernetes_cluster" "kubernetes" {
 
   agent_pool_profile {
     name            = "default"
-    count           = "${var.node_count}"
     vm_size         = "${var.node_type}"
     os_type         = "Linux"
     os_disk_size_gb = "${var.os_disk_size_gb}"

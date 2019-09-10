@@ -15,17 +15,12 @@ variable "location" {
 
 variable "kubernetes_version" {
   description = "Kubernetes version"
-  default     = "1.13.8"
+  default     = "1.14.6"
 }
 
 variable "os_disk_size_gb" {
   description = "OS disk size"
   default     = "32"
-}
-
-variable "node_count" {
-  description = "Number of nodes"
-  default     = "2"
 }
 
 variable "node_type" {
@@ -60,7 +55,7 @@ variable "agent_pool_profile_max_count" {
 }
 
 variable "agent_pool_profile_type" {
-  default = "AvailabilitySet"
+  default = "VirtualMachineScaleSets"
 }
 
 variable "agent_pool_profile_enable_auto_scaling" {
@@ -68,5 +63,5 @@ variable "agent_pool_profile_enable_auto_scaling" {
 }
 
 variable "max_pods" {
-  default = 256
+  default = 100
 }
