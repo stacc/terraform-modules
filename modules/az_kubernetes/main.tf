@@ -15,7 +15,7 @@ resource "azurerm_subnet" "kubesubnet" {
   address_prefix       = "${var.subnet_address_prefix}"
   virtual_network_name = "${var.vnet.name}"
 
-  service_endpoints    = "${var.service_endpoints}"
+  service_endpoints = "${var.service_endpoints}"
 }
 
 locals {
@@ -35,6 +35,10 @@ resource "azurerm_kubernetes_cluster" "kubernetes" {
   dns_prefix          = "${var.name}-${var.environment}"
   kubernetes_version  = "${var.kubernetes_version}"
 
+  lifecycle {
+    ignore_changes = var.agent_pool_profile_enable_auto_scaling ? ["agent_pool_profile.0.count"] : []
+  }
+
   agent_pool_profile {
     name            = "default"
     vm_size         = "${var.node_type}"
@@ -42,10 +46,12 @@ resource "azurerm_kubernetes_cluster" "kubernetes" {
     os_disk_size_gb = "${var.os_disk_size_gb}"
     max_pods        = "${var.max_pods}"
 
+    type  = "${var.agent_pool_profile_type}"
+    count = "${var.agent_pool_profile_count}"
+
     enable_auto_scaling = "${var.agent_pool_profile_enable_auto_scaling}"
     min_count           = "${var.agent_pool_profile_min_count}"
     max_count           = "${var.agent_pool_profile_max_count}"
-    type                = "${var.agent_pool_profile_type}"
 
     vnet_subnet_id = "${azurerm_subnet.kubesubnet.id}"
   }

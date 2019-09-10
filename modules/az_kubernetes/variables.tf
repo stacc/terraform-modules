@@ -46,6 +46,18 @@ variable "subnet_address_prefix" {
   default = "10.1.0.0/17"
 }
 
+variable "agent_pool_profile_type" {
+  default = "VirtualMachineScaleSets"
+}
+
+variable "agent_pool_profile_count" {
+  default = 1
+}
+
+variable "agent_pool_profile_enable_auto_scaling" {
+  default = true
+}
+
 variable "agent_pool_profile_min_count" {
   default = 3
 }
@@ -54,15 +66,7 @@ variable "agent_pool_profile_max_count" {
   default = 7
 }
 
-variable "agent_pool_profile_type" {
-  default = "VirtualMachineScaleSets"
-}
-
-variable "agent_pool_profile_enable_auto_scaling" {
-  default = true
-}
-
-variable "max_pods" {
+variable "agent_pool_profile_max_pods" {
   default = 100
 }
 
