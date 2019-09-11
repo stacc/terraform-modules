@@ -51,7 +51,7 @@ variable "agent_pool_profile_type" {
 }
 
 variable "agent_pool_profile_count" {
-  default = 1
+  default = 3
 }
 
 variable "agent_pool_profile_enable_auto_scaling" {
