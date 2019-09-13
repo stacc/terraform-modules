@@ -27,6 +27,6 @@ variable "share_name" {
   default = "staccfileshare"
 }
 
-default "quota" {
+variable "quota" {
   default = 200
 }
