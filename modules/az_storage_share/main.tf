@@ -13,7 +13,7 @@ resource "azurerm_storage_account" "sa" {
   location                 = "${var.location}"
   account_tier             = "${var.account_tier}"
   account_replication_type = "${var.account_replication_type}"
-
+  account_kind             = "FileStorage"
   tags = {
     environment = "${var.environment}"
   }
