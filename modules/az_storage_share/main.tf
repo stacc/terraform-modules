@@ -18,7 +18,7 @@ resource "azurerm_storage_share" "share" {
 
 resource "kubernetes_secret" "fileshare-secret" {
   metadata {
-    name = "${var.name}-${var.environment}-fileshare"
+    name = "${var.sa_name}-${var.environment}-fileshare"
   }
   data = {
     azurestorageaccountname = "${var.sa_name}"
