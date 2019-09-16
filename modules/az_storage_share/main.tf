@@ -25,13 +25,32 @@ provider "kubernetes" {
   cluster_ca_certificate = "${base64decode(var.kubernetes_cluster.kube_admin_config.0.cluster_ca_certificate)}"
 }
 
-resource "kubernetes_secret" "fileshare-secret" {
+resource "kubernetes_secret" "filestorage-secret" {
   metadata {
-    name = "${var.sa_name}-${var.environment}-fileshare"
+    name = "${var.sa_name}-${var.environment}-filestorage"
   }
   data = {
     azurestorageaccountname = "${var.sa_name}"
-    azurestorageaccountkey = "${azurerm_storage_account.sa.primary_access_key}"
+    azurestorageaccountkey  = "${azurerm_storage_account.sa.primary_access_key}"
   }
   type = "Opaque"
+}
+
+resource "kubernetes_persistent_volume" "filestorage" {
+  metadata {
+    name = "${var.sa_name}-${var.environment}-filestorage-pv"
+  }
+  spec {
+    capacity = {
+      storage = "200Gi"
+    }
+    access_modes = ["ReadWriteMany"]
+    persistent_volume_source {
+      azure_file {
+        read_only   = false
+        secret_name = "${kubernetes_secret.filestorage-secret.name}"
+        share_name  = "${var.share_name}"
+      }
+    }
+  }
 }
