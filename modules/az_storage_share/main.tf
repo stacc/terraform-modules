@@ -48,7 +48,7 @@ resource "kubernetes_persistent_volume" "filestorage" {
     persistent_volume_source {
       azure_file {
         read_only   = false
-        secret_name = "${kubernetes_secret.filestorage-secret.name}"
+        secret_name = "${kubernetes_secret.filestorage-secret.secret_name}"
         share_name  = "${var.share_name}"
       }
     }
