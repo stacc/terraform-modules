@@ -15,3 +15,14 @@ resource "azurerm_storage_share" "share" {
   storage_account_name = "${azurerm_storage_account.sa.name}"
   quota                = "${var.quota}"
 }
+
+resource "kubernetes_secret" "fileshare-secret" {
+  metadata {
+    name = "${var.name}-${var.environment}-fileshare"
+  }
+  data = {
+    azurestorageaccountname = "${var.sa_name}"
+    azurestorageaccountkey = "${azurerm_storage_account.sa.primary_access_key}"
+  }
+  type = "Opaque"
+}
