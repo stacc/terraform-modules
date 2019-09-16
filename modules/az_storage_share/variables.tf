@@ -30,3 +30,6 @@ variable "share_name" {
 variable "quota" {
   default = 200
 }
+
+variable "kubernetes_cluster" {
+}
