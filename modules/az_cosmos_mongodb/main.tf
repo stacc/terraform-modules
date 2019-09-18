@@ -34,3 +34,22 @@ resource "azurerm_cosmosdb_mongo_database" "database" {
   resource_group_name = "${var.resource_group.name}"
   account_name        = "${azurerm_cosmosdb_account.account.name}"
 }
+
+provider "kubernetes" {
+  version                = "1.7"
+  load_config_file       = false
+  host                   = "${var.kubernetes_cluster.kube_admin_config.0.host}"
+  client_certificate     = "${base64decode(var.kubernetes_cluster.kube_admin_config.0.client_certificate)}"
+  client_key             = "${base64decode(var.kubernetes_cluster.kube_admin_config.0.client_key)}"
+  cluster_ca_certificate = "${base64decode(var.kubernetes_cluster.kube_admin_config.0.cluster_ca_certificate)}"
+}
+
+resource "kubernetes_secret" "database_secret" {
+  metadata {
+    name = "${var.name}-${var.environment}-db-cosmos${var.account_name_suffix}"
+  }
+  data = {
+    connection-string = "${azurerm_cosmosdb_account.account.connection_strings[0]}"
+  }
+  type = "Opaque"
+}

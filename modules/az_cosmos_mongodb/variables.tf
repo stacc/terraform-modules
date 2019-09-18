@@ -13,7 +13,7 @@ variable "environment" {
 }
 
 variable "enable_automatic_failover" {
-  default     = true
+  default = true
 }
 
 variable "consistency_level" {
@@ -41,12 +41,13 @@ variable "database_names" {
 }
 
 variable "unique_key" {
-  default     = "uniqueKey"
+  default = "uniqueKey"
 }
 
-variable "failover_location" {
+variable "failover_location" {}
 
-}
 variable "capabilities" {
   default = "EnableAggregationPipeline"
 }
+
+variable "kubernetes_cluster" {}
