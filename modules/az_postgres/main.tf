@@ -73,7 +73,7 @@ resource "kubernetes_secret" "database_secret" {
     name = "${var.name}-${var.environment}-db-postgres"
   }
   data = {
-    password = "${random_string.password.result}"
+    postgres-password = "${random_string.password.result}"
   }
   type = "Opaque"
 }
@@ -83,5 +83,5 @@ resource "random_string" "password" {
   min_lower   = 1
   min_numeric = 1
   min_upper   = 1
-  special = false
+  special     = false
 }
