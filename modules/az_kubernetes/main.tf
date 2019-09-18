@@ -35,10 +35,6 @@ resource "azurerm_kubernetes_cluster" "kubernetes" {
   dns_prefix          = "${var.name}-${var.environment}"
   kubernetes_version  = "${var.kubernetes_version}"
 
-  lifecycle {
-    ignore_changes = [ "agent_pool_profile[0].count" ]
-  }
-
   agent_pool_profile {
     name            = "default"
     vm_size         = "${var.node_type}"
