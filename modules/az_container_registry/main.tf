@@ -1,6 +1,4 @@
-provider "azurerm" {
-  version = "~>1.29"
-}
+
 
 resource "azurerm_resource_group" "rg" {
   name     = "${var.name}-acr-rg"

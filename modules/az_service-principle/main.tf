@@ -1,14 +1,3 @@
-provider "azurerm" {
-  version = "~>1.33.0"
-}
-
-provider "azuread" {
-  version = "~>0.6.0"
-}
-
-provider "random" {
-  version = "2.1.2"
-}
 
 resource "azuread_application" "application" {
   name = "${var.name}"

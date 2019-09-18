@@ -1,6 +1,3 @@
-provider "azurerm" {
-  version = "~>1.29"
-}
 
 resource "azurerm_resource_group" "tf_rg" {
   name     = "${var.name}-tf-rg"

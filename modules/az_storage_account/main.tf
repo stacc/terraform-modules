@@ -1,6 +1,3 @@
-provider "azurerm" {
-  version = "~>1.29"
-}
 
 resource "azurerm_storage_account" "storage_account" {
   name                     = "${var.sa_name}"
