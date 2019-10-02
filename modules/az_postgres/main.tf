@@ -50,15 +50,6 @@ resource "azurerm_postgresql_server" "server" {
   }
 }
 
-resource "azurerm_postgresql_database" "databases" {
-  count               = length(var.database_names)
-  name                = "${var.database_names[count.index]}"
-  resource_group_name = "${var.resource_group.name}"
-  server_name         = "${azurerm_postgresql_server.server.name}"
-  charset             = "UTF8"
-  collation           = "English_United States.1252"
-}
-
 provider "kubernetes" {
   version                = "1.7"
   load_config_file       = false
@@ -70,10 +61,15 @@ provider "kubernetes" {
 
 resource "kubernetes_secret" "database_secret" {
   metadata {
-    name = "${var.name}-${var.environment}-db-postgres"
+    name      = "${var.name}-${var.environment}-db-postgres"
+    namespace = "default"
   }
   data = {
-    postgres-password = "${random_string.password.result}"
+    login_host     = "${azurerm_postgresql_server.server.fqdn}"
+    login_user     = "staccadmin"
+    login_password = "${random_string.password.result}"
+    resource_group = "${var.resource_group.name}"
+    server_name    = "${var.name}-${var.environment}-db-postgres"
   }
   type = "Opaque"
 }
