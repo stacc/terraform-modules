@@ -66,7 +66,7 @@ resource "kubernetes_secret" "database_secret" {
   }
   data = {
     login_host     = "${azurerm_postgresql_server.server.fqdn}"
-    login_user     = "staccadmin"
+    login_user     = "staccadmin@${var.name}-${var.environment}-db-postgres"
     login_password = "${random_string.password.result}"
     resource_group = "${var.resource_group.name}"
     server_name    = "${var.name}-${var.environment}-db-postgres"
