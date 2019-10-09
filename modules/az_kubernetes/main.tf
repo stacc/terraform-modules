@@ -36,7 +36,7 @@ resource "azurerm_kubernetes_cluster" "kubernetes" {
   kubernetes_version  = "${var.kubernetes_version}"
 
   lifecycle {
-    ignore_changes = [ "agent_pool_profile[0].count" ]
+    ignore_changes = ["agent_pool_profile[0].count"]
   }
 
   agent_pool_profile {
@@ -71,7 +71,8 @@ resource "azurerm_kubernetes_cluster" "kubernetes" {
   }
 
   network_profile {
-    network_plugin = "azure"
+    network_plugin    = "azure"
+    load_balancer_sku = "${var.load_balancer_sku}"
   }
 
   tags = {

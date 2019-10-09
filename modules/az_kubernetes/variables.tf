@@ -75,3 +75,7 @@ variable "service_endpoints" {
   type        = list(string)
   default     = []
 }
+
+variable "load_balancer_sku" {
+  default = "Basic"
+}
