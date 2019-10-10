@@ -37,9 +37,3 @@ variable "database_capacity" {
   description = "Number of CPU's for the database server"
   default     = 2
 }
-
-variable "database_names" {
-  description = "List of the database names"
-  type        = list(string)
-  default     = ["grafana", "test"]
-}
