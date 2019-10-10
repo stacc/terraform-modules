@@ -8,6 +8,7 @@ resource "azurerm_resource_group" "tf_rg" {
 
   tags = {
     environment = "${var.environment}"
+    managedBy   = "terraform"
   }
 }
 
@@ -20,6 +21,7 @@ resource "azurerm_storage_account" "tf_sa" {
 
   tags = {
     environment = "${var.environment}"
+    managedBy   = "terraform"
   }
 }
 resource "azurerm_storage_container" "tf_sc" {

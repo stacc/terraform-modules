@@ -77,6 +77,7 @@ resource "azurerm_kubernetes_cluster" "kubernetes" {
 
   tags = {
     environment = "${var.environment}"
+    managedBy   = "terraform"
   }
 
   depends_on = ["azurerm_subnet.kubesubnet"]

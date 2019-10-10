@@ -46,6 +46,7 @@ resource "azurerm_mysql_server" "mysql" {
 
   tags = {
     environment = "${var.environment}"
+    managedBy   = "terraform"
   }
 }
 

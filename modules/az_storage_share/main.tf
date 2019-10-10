@@ -7,6 +7,7 @@ resource "azurerm_storage_account" "sa" {
   account_kind             = "FileStorage"
   tags = {
     environment = "${var.environment}"
+    managedBy   = "terraform"
   }
 }
 

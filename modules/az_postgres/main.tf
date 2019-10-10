@@ -47,6 +47,7 @@ resource "azurerm_postgresql_server" "server" {
 
   tags = {
     environment = "${var.environment}"
+    managedBy   = "terraform"
   }
 }
 

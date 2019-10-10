@@ -8,6 +8,7 @@ resource "azurerm_resource_group" "rg" {
 
   tags = {
     environment = "${var.environment}"
+    managedBy   = "terraform"
   }
 }
 
@@ -20,5 +21,6 @@ resource "azurerm_container_registry" "acr" {
 
   tags = {
     environment = "${var.environment}"
+    managedBy   = "terraform"
   }
 }

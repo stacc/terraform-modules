@@ -4,6 +4,7 @@ resource "azurerm_resource_group" "resource_group" {
 
   tags = {
     environment = "${var.environment}"
+    managedBy   = "terraform"
   }
 }
 
@@ -16,5 +17,6 @@ resource "azurerm_public_ip" "public_ip" {
 
   tags = {
     environment = "${var.environment}"
+    managedBy   = "terraform"
   }
 }

@@ -24,6 +24,7 @@ resource "azurerm_cosmosdb_account" "account" {
 
   tags = {
     environment = "${var.environment}"
+    managedBy   = "terraform"
   }
 }
 

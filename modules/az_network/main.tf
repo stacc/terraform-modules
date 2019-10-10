@@ -6,5 +6,6 @@ resource "azurerm_virtual_network" "vnet" {
 
   tags = {
     environment = "${var.environment}"
+    managedBy   = "terraform"
   }
 }

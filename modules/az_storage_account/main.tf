@@ -11,6 +11,7 @@ resource "azurerm_storage_account" "storage_account" {
 
   tags = {
     environment = "${var.environment}"
+    managedBy   = "terraform"
   }
 }
 resource "azurerm_storage_container" "storage_container" {
