@@ -13,7 +13,9 @@ resource "azurerm_public_ip" "public_ip" {
   name                = "${var.name}-${var.environment}-public-ip-${count.index + 1}"
   location            = "${azurerm_resource_group.resource_group.location}"
   resource_group_name = "${azurerm_resource_group.resource_group.name}"
-  allocation_method   = "Static"
+
+  sku               = "${var.sku}"
+  allocation_method = "${var.allocation_method}"
 
   tags = {
     environment = "${var.environment}"
