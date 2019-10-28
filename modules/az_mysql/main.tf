@@ -1,6 +1,6 @@
 resource "azurerm_subnet" "mysqlsubnet" {
   name                 = "mysqlsubnet"
-  resource_group_name  = "${var.resource_group.name}"
+  resource_group_name  = "${var.vnet.resource_group_name}"
   address_prefix       = "10.1.129.0/24"
   virtual_network_name = "${var.vnet.name}"
   service_endpoints    = ["Microsoft.Sql"]
