@@ -25,11 +25,11 @@ variable "database_type" {
   default     = "GP_Gen5_2"
 }
 
-valriable "database_tier" {
+variable "database_tier" {
   default = "GeneralPurpose"
 }
 
-valriable "database_family" {
+variable "database_family" {
   default = "Gen5"
 }
 
