@@ -29,8 +29,8 @@ resource "azurerm_mysql_server" "mysql" {
   sku {
     name     = "${var.database_type}"
     capacity = "${var.database_capacity}"
-    tier     = "GeneralPurpose"
-    family   = "Gen5"
+    tier     = "${var.database_tier}"
+    family   = "${var.database_family}"
   }
 
   storage_profile {

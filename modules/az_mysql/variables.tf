@@ -25,6 +25,14 @@ variable "database_type" {
   default     = "GP_Gen5_2"
 }
 
+valriable "database_tier" {
+  default = "GeneralPurpose"
+}
+
+valriable "database_family" {
+  default = "Gen5"
+}
+
 variable "database_storage" {
   description = "The size of the database server in MB"
   default     = 5120
