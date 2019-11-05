@@ -33,6 +33,10 @@ variable "database_family" {
   default = "Gen5"
 }
 
+variable "database_version" {
+  default = "5.7"
+}
+
 variable "database_storage" {
   description = "The size of the database server in MB"
   default     = 5120
@@ -41,11 +45,4 @@ variable "database_storage" {
 variable "database_capacity" {
   description = "Number of CPU's for the database server"
   default = 2
-}
-
-
-variable "database_names" {
-  description = "List of the database names"
-  type        = list(string)
-  default     = ["grafana", "test"]
 }

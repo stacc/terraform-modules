@@ -41,22 +41,13 @@ resource "azurerm_mysql_server" "mysql" {
 
   administrator_login          = "staccadmin"
   administrator_login_password = "${random_string.password.result}"
-  version                      = "5.7"
+  version                      = "${var.database_version}"
   ssl_enforcement              = "Enabled"
 
   tags = {
     environment = "${var.environment}"
     managedBy   = "terraform"
   }
-}
-
-resource "azurerm_mysql_database" "databases" {
-  count               = length(var.database_names)
-  name                = "${var.database_names[count.index]}"
-  resource_group_name = "${var.resource_group.name}"
-  server_name         = "${azurerm_mysql_server.mysql.name}"
-  charset             = "utf8"
-  collation           = "utf8_unicode_ci"
 }
 
 provider "kubernetes" {
@@ -71,14 +62,22 @@ provider "kubernetes" {
 resource "kubernetes_secret" "database_secret" {
   metadata {
     name = "${var.name}-${var.environment}-db-mysql"
+    namespace = "default"
   }
   data = {
-    password = "${random_string.password.result}"
+    login_host     = "${azurerm_mysql_server.mysql.fqdn}"
+    login_user     = "staccadmin@${var.name}-${var.environment}-db-mysql"
+    login_password = "${random_string.password.result}"
+    resource_group = "${var.resource_group.name}"
+    server_name    = "${var.name}-${var.environment}-db-mysql"
   }
   type = "Opaque"
 }
 
 resource "random_string" "password" {
-  length  = 16
-  special = false
+  length      = 16
+  min_lower   = 1
+  min_numeric = 1
+  min_upper   = 1
+  special     = false
 }
