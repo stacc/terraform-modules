@@ -20,6 +20,12 @@ resource "azuread_group" "cluster_developers" {
   name = "s_${var.name}-${var.environment}_cluster_developers"
 }
 
+resource "azurerm_role_assignment" "cluster_admin_aks_admin" {
+  scope                = "${var.resource_group.id}"
+  role_definition_name = "Azure Kubernetes Service Cluster Admin Role"
+  principal_id         = "${azuread_group.cluster_admins.id}"
+}
+
 resource "azurerm_role_assignment" "cluster_admin_aks" {
   scope                = "${var.resource_group.id}"
   role_definition_name = "Azure Kubernetes Service Cluster User Role"
