@@ -1,19 +1,3 @@
-resource "azurerm_subnet" "postgressubnet" {
-  name                 = "postgressubnet"
-  resource_group_name  = "${var.vnet.resource_group_name}"
-  address_prefix       = "10.1.128.0/24"
-  virtual_network_name = "${var.vnet.name}"
-  service_endpoints    = ["Microsoft.Sql"]
-}
-
-resource "azurerm_postgresql_virtual_network_rule" "vnet_rule" {
-  name                                 = "postgresql-vnet-rule"
-  resource_group_name                  = "${var.resource_group.name}"
-  server_name                          = "${azurerm_postgresql_server.server.name}"
-  subnet_id                            = "${azurerm_subnet.postgressubnet.id}"
-  ignore_missing_vnet_service_endpoint = true
-}
-
 resource "azurerm_postgresql_firewall_rule" "azure_svc_rule" {
   name                = "allow-all-azure-ips-fw-rule"
   resource_group_name = "${var.resource_group.name}"

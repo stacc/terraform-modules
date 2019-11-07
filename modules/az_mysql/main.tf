@@ -1,18 +1,3 @@
-resource "azurerm_subnet" "mysqlsubnet" {
-  name                 = "mysqlsubnet"
-  resource_group_name  = "${var.vnet.resource_group_name}"
-  address_prefix       = "10.1.129.0/24"
-  virtual_network_name = "${var.vnet.name}"
-  service_endpoints    = ["Microsoft.Sql"]
-}
-
-resource "azurerm_mysql_virtual_network_rule" "vnetrule" {
-  name                = "mysql-vnet-rule"
-  resource_group_name = "${var.resource_group.name}"
-  server_name         = "${azurerm_mysql_server.mysql.name}"
-  subnet_id           = "${azurerm_subnet.mysqlsubnet.id}"
-}
-
 resource "azurerm_mysql_firewall_rule" "azure_svc_rule" {
   name                = "allow-all-azure-ips-fw-rule"
   resource_group_name = "${var.resource_group.name}"
