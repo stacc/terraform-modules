@@ -28,3 +28,8 @@ variable "account_kind" {
   default = "Storage"
 }
 
+variable "enable_https_traffic_only" {
+  default = false
+}
+
+

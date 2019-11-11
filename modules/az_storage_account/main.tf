@@ -9,6 +9,7 @@ resource "azurerm_storage_account" "storage_account" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
   account_kind             = "${var.account_kind}"
+  enable_https_traffic_only = "${var.enable_https_traffic_only}"
 
   tags = {
     environment = "${var.environment}"
