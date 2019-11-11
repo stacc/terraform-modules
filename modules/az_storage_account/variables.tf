@@ -23,3 +23,8 @@ variable "rg_name" {
 variable "storage_containers" {
   description = "A list of containers to be created"
 }
+
+variable "account_kind" {
+  default = "Storage"
+}
+
