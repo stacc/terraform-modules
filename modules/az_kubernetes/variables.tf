@@ -43,7 +43,7 @@ variable "vnet" {
 variable "subnet_address_prefix" {
   # (number of nodes + 1) + ((number of nodes + 1) * maximum pods per node that you configure)
   description = "The address prefix of the subnet"
-  default = "10.1.0.0/17"
+  default     = "10.1.0.0/17"
 }
 
 variable "agent_pool_profile_type" {
