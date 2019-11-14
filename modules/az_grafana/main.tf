@@ -23,7 +23,7 @@ resource "azuread_service_principal" "grafana_client" {
 resource "azuread_service_principal_password" "grafana_client_password" {
   service_principal_id = "azuread_service_principal.grafana_client.id"
   value                = "random_string.application_client_password.result"
-  end_date             = "timeadd(timestamp(), "87600h")" # 10 years
+  end_date             = "timeadd(timestamp(), 87600h)" # 10 years
 
   lifecycle {
     ignore_changes = ["end_date"]
