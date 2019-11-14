@@ -38,23 +38,23 @@ resource "azurerm_postgresql_server" "server" {
 provider "kubernetes" {
   version                = "1.7"
   load_config_file       = false
-  host                   = "var.kubernetes_cluster.kube_admin_config.0.host"
-  client_certificate     = "${base64decode(var.kubernetes_cluster.kube_admin_config.0.client_certificate)}"
-  client_key             = "${base64decode(var.kubernetes_cluster.kube_admin_config.0.client_key)}"
-  cluster_ca_certificate = "${base64decode(var.kubernetes_cluster.kube_admin_config.0.cluster_ca_certificate)}"
+  host                   = var.kubernetes_cluster.kube_admin_config.0.host
+  client_certificate     = base64decode(var.kubernetes_cluster.kube_admin_config.0.client_certificate)
+  client_key             = base64decode(var.kubernetes_cluster.kube_admin_config.0.client_key)
+  cluster_ca_certificate = base64decode(var.kubernetes_cluster.kube_admin_config.0.cluster_ca_certificate)
 }
 
 resource "kubernetes_secret" "database_secret" {
   metadata {
-    name      = "var.name-var.environment-db-postgres"
+    name      = "${var.name}-${var.environment}-db-postgres"
     namespace = "default"
   }
   data = {
     login_host     = azurerm_postgresql_server.server.fqdn
-    login_user     = "staccadmin@var.name-var.environment-db-postgres"
+    login_user     = "staccadmin@${var.name}-${var.environment}-db-postgres"
     login_password = random_string.password.result
     resource_group = var.resource_group.name
-    server_name    = "var.name-var.environment-db-postgres"
+    server_name    = "${var.name}-${var.environment}-db-postgres"
   }
   type = "Opaque"
 }
