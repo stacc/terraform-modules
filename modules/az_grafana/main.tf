@@ -1,6 +1,6 @@
 resource "azuread_application" "grafana" {
   name       = "${var.name}-${var.environment}_grafana_client"
-  reply_urls = "${var.reply_urls}"
+  reply_urls = var.reply_urls
   type       = "webapp/api"
 
   required_resource_access {
@@ -17,16 +17,16 @@ resource "azuread_application" "grafana" {
 }
 
 resource "azuread_service_principal" "grafana_client" {
-  application_id = "${azuread_application.grafana.application_id}"
+  application_id = azuread_application.grafana.application_id
 }
 
 resource "azuread_service_principal_password" "grafana_client_password" {
-  service_principal_id = "${azuread_service_principal.grafana_client.id}"
-  value                = "${random_string.application_client_password.result}"
-  end_date             = "${timeadd(timestamp(), "87600h")}" # 10 years
+  service_principal_id = azuread_service_principal.grafana_client.id
+  value                = random_string.application_client_password.result
+  end_date             = timeadd(timestamp(), "87600h") # 10 years
 
   lifecycle {
-    ignore_changes = ["end_date"]
+    ignore_changes = [end_date]
   }
 }
 
@@ -35,6 +35,6 @@ resource "random_string" "application_client_password" {
   special = false
 
   keepers = {
-    service_principal = "${azuread_service_principal.grafana_client.id}"
+    service_principal = azuread_service_principal.grafana_client.id
   }
 }

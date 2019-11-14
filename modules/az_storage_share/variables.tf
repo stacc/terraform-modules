@@ -12,7 +12,7 @@ variable "environment" {
 
 variable "sa_name" {
   description = "A unique name for the storage account"
-  default = "staccfilesa"
+  default     = "staccfilesa"
 }
 
 variable "account_tier" {
@@ -33,3 +33,4 @@ variable "quota" {
 
 variable "kubernetes_cluster" {
 }
+

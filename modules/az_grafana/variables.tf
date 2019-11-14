@@ -9,5 +9,4 @@ variable "environment" {
 }
 
 variable "reply_urls" {
-
 }

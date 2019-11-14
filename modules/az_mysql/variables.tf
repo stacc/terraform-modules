@@ -17,7 +17,6 @@ variable "vnet" {
 }
 
 variable "kubernetes_cluster" {
-
 }
 
 variable "database_type" {
@@ -44,5 +43,5 @@ variable "database_storage" {
 
 variable "database_capacity" {
   description = "Number of CPU's for the database server"
-  default = 2
+  default     = 2
 }

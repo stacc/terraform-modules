@@ -13,3 +13,4 @@ variable "location" {
 variable "environment" {
   default = "global"
 }
+
