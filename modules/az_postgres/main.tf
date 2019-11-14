@@ -7,7 +7,7 @@ resource "azurerm_postgresql_firewall_rule" "azure_svc_rule" {
 }
 
 resource "azurerm_postgresql_server" "server" {
-  name                = "var.name-var.environment-db-postgres"
+  name                = "${var.name}-${var.environment}-db-postgres"
   location            = var.resource_group.location
   resource_group_name = var.resource_group.name
 
@@ -38,10 +38,10 @@ resource "azurerm_postgresql_server" "server" {
 provider "kubernetes" {
   version                = "1.7"
   load_config_file       = false
-  host                   = var.kubernetes_cluster.kube_admin_config.0.host
-  client_certificate     = base64decode(var.kubernetes_cluster.kube_admin_config.0.client_certificate)
-  client_key             = base64decode(var.kubernetes_cluster.kube_admin_config.0.client_key)
-  cluster_ca_certificate = base64decode(var.kubernetes_cluster.kube_admin_config.0.cluster_ca_certificate)
+  host                   = "var.kubernetes_cluster.kube_admin_config.0.host"
+  client_certificate     = "${base64decode(var.kubernetes_cluster.kube_admin_config.0.client_certificate)}"
+  client_key             = "${base64decode(var.kubernetes_cluster.kube_admin_config.0.client_key)}"
+  cluster_ca_certificate = "${base64decode(var.kubernetes_cluster.kube_admin_config.0.cluster_ca_certificate)}"
 }
 
 resource "kubernetes_secret" "database_secret" {
