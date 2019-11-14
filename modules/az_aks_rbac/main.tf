@@ -11,30 +11,30 @@ provider "random" {
 }
 
 resource "azuread_application" "client" {
-  name       = "${var.name}-${var.environment}_k8s_client"
-  reply_urls = ["https://${var.name}-${var.environment}_k8s_client"]
+  name       = "var.name-var.environment_k8s_client"
+  reply_urls = ["https://var.name-var.environment_k8s_client"]
   type       = "native"
 
   required_resource_access {
     # AKS ad application server
-    resource_app_id = "${azuread_application.server.application_id}"
+    resource_app_id = "azuread_application.server.application_id"
 
     resource_access {
       # Server app Oauth2 permissions id
-      id   = "${lookup(azuread_application.server.oauth2_permissions[0], "id")}"
+      id   = "lookup(azuread_application.server.oauth2_permissions[0], "id")"
       type = "Scope"
     }
   }
 }
 
 resource "azuread_service_principal" "client" {
-  application_id = "${azuread_application.client.application_id}"
+  application_id = "azuread_application.client.application_id"
 }
 
 resource "azuread_service_principal_password" "client" {
-  service_principal_id = "${azuread_service_principal.client.id}"
-  value                = "${random_string.application_client_password.result}"
-  end_date             = "${timeadd(timestamp(), "87600h")}" # 10 years
+  service_principal_id = "azuread_service_principal.client.id"
+  value                = "random_string.application_client_password.result"
+  end_date             = "timeadd(timestamp(), "87600h")" # 10 years
 
   lifecycle {
     ignore_changes = ["end_date"]
@@ -46,16 +46,16 @@ resource "random_string" "application_client_password" {
   special = false
 
   keepers = {
-    service_principal = "${azuread_service_principal.client.id}"
+    service_principal = "azuread_service_principal.client.id"
   }
 }
 
 resource "azuread_application" "server" {
-  name                    = "${var.name}-${var.environment}_k8s_server"
+  name                    = "var.name-var.environment_k8s_server"
   reply_urls              = []
   type                    = "webapp/api"
   group_membership_claims = "All"
-  identifier_uris         = ["https://${var.name}-${var.environment}_k8s_server"]
+  identifier_uris         = ["https://var.name-var.environment_k8s_server"]
 
   required_resource_access {
     # MicrosoftGraph API
@@ -85,13 +85,13 @@ resource "azuread_application" "server" {
 }
 
 resource "azuread_service_principal" "server" {
-  application_id = "${azuread_application.server.application_id}"
+  application_id = "azuread_application.server.application_id"
 }
 
 resource "azuread_service_principal_password" "server" {
-  service_principal_id = "${azuread_service_principal.server.id}"
-  value                = "${random_string.application_server_password.result}"
-  end_date             = "${timeadd(timestamp(), "87600h")}" # 10 years
+  service_principal_id = "azuread_service_principal.server.id"
+  value                = "random_string.application_server_password.result"
+  end_date             = "timeadd(timestamp(), "87600h")" # 10 years
 
   # The end date will change at each run (terraform apply), causing a new password to
   # be set. So we ignore changes on this field in the resource lifecyle to avoid this
@@ -108,6 +108,6 @@ resource "random_string" "application_server_password" {
   special = false
 
   keepers = {
-    service_principal = "${azuread_service_principal.server.id}"
+    service_principal = "azuread_service_principal.server.id"
   }
 }

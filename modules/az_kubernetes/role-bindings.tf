@@ -1,10 +1,10 @@
 provider "kubernetes" {
   version                = "1.7"
   load_config_file       = false
-  host                   = "${azurerm_kubernetes_cluster.kubernetes.kube_admin_config.0.host}"
-  client_certificate     = "${base64decode(azurerm_kubernetes_cluster.kubernetes.kube_admin_config.0.client_certificate)}"
-  client_key             = "${base64decode(azurerm_kubernetes_cluster.kubernetes.kube_admin_config.0.client_key)}"
-  cluster_ca_certificate = "${base64decode(azurerm_kubernetes_cluster.kubernetes.kube_admin_config.0.cluster_ca_certificate)}"
+  host                   = "azurerm_kubernetes_cluster.kubernetes.kube_admin_config.0.host"
+  client_certificate     = "base64decode(azurerm_kubernetes_cluster.kubernetes.kube_admin_config.0.client_certificate)"
+  client_key             = "base64decode(azurerm_kubernetes_cluster.kubernetes.kube_admin_config.0.client_key)"
+  cluster_ca_certificate = "base64decode(azurerm_kubernetes_cluster.kubernetes.kube_admin_config.0.cluster_ca_certificate)"
 }
 
 resource "kubernetes_cluster_role_binding" "example" {
@@ -18,7 +18,7 @@ resource "kubernetes_cluster_role_binding" "example" {
   }
   subject {
     kind      = "Group"
-    name      = "${azuread_group.cluster_admins.id}"
+    name      = "azuread_group.cluster_admins.id"
     api_group = "rbac.authorization.k8s.io"
   }
 }
