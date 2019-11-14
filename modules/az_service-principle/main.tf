@@ -11,16 +11,16 @@ provider "random" {
 }
 
 resource "azuread_application" "application" {
-  name = "${var.name}"
+  name = var.name
 }
 
 resource "azuread_service_principal" "service_principal" {
-  application_id = "${azuread_application.application.application_id}"
+  application_id = azuread_application.application.application_id
 }
 
 resource "azuread_service_principal_password" "service_principal_password" {
-  service_principal_id = "${azuread_service_principal.service_principal.id}"
-  value                = "${random_string.password.result}"
+  service_principal_id = azuread_service_principal.service_principal.id
+  value                = random_string.password.result
   end_date             = "2025-01-01T01:02:03Z"
 }
 
