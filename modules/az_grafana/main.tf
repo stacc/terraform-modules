@@ -1,6 +1,6 @@
 resource "azuread_application" "grafana" {
   name       = "var.name-var.environment_grafana_client"
-  reply_urls = "var.reply_urls"
+  reply_urls = var.reply_urls
   type       = "webapp/api"
 
   required_resource_access {
