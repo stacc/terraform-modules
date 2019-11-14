@@ -91,7 +91,7 @@ resource "azuread_service_principal" "server" {
 resource "azuread_service_principal_password" "server" {
   service_principal_id = "azuread_service_principal.server.id"
   value                = "random_string.application_server_password.result"
-  end_date             = "timeadd(timestamp(), 87600h)" # 10 years
+  end_date             = "timeadd(timestamp(), "87600h")" # 10 years
 
   # The end date will change at each run (terraform apply), causing a new password to
   # be set. So we ignore changes on this field in the resource lifecyle to avoid this
