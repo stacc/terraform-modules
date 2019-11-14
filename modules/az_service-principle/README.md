@@ -37,5 +37,5 @@ ef54d2bf-783f-4e0f-bca1-3210c0444d99 Read and write calendars in all mailboxes
 # Example
   module "service-principle" {
     source  = "../../modules/az_service-principle"
-    sp_name = "var.name-var.environment-k8s"
+    sp_name = "${var.name}-${var.environment}-k8s"
   }
