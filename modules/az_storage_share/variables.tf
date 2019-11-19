@@ -27,10 +27,13 @@ variable "share_name" {
   default = "staccfileshare"
 }
 
-variable "quota" {
+variable "share_quota" {
   default = 200
 }
 
 variable "kubernetes_cluster" {
 }
 
+variable "kubernetes_secret_name" {
+  default = "staccfileshare"
+}

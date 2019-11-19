@@ -14,49 +14,29 @@ resource "azurerm_storage_account" "sa" {
 resource "azurerm_storage_share" "share" {
   name                 = var.share_name
   storage_account_name = azurerm_storage_account.sa.name
-  quota                = var.quota
+  quota                = var.share_quota
 }
 
 provider "kubernetes" {
-  version          = "1.7"
-  load_config_file = false
-  host             = var.kubernetes_cluster.kube_admin_config[0].host
-  client_certificate = base64decode(
-    var.kubernetes_cluster.kube_admin_config[0].client_certificate,
-  )
-  client_key = base64decode(var.kubernetes_cluster.kube_admin_config[0].client_key)
-  cluster_ca_certificate = base64decode(
-    var.kubernetes_cluster.kube_admin_config[0].cluster_ca_certificate,
-  )
+  version                = "1.7"
+  load_config_file       = false
+  host                   = var.kubernetes_cluster.kube_admin_config[0].host
+  client_certificate     = base64decode(var.kubernetes_cluster.kube_admin_config[0].client_certificate)
+  client_key             = base64decode(var.kubernetes_cluster.kube_admin_config[0].client_key)
+  cluster_ca_certificate = base64decode(var.kubernetes_cluster.kube_admin_config[0].cluster_ca_certificate)
 }
 
-resource "kubernetes_secret" "filestorage-secret" {
+resource "kubernetes_secret" "share-secret" {
   metadata {
-    name = "${var.sa_name}-${var.environment}-filestorage"
+    name = var.kubernetes_secret_name
+    labels = {
+      managedBy = "terraform"
+    }
   }
   data = {
     azurestorageaccountname = var.sa_name
     azurestorageaccountkey  = azurerm_storage_account.sa.primary_access_key
+    azurestoragesharename   = var.share_name
   }
   type = "Opaque"
 }
-
-resource "kubernetes_persistent_volume" "filestorage" {
-  metadata {
-    name = "${var.sa_name}-${var.environment}-filestorage-pv"
-  }
-  spec {
-    capacity = {
-      storage = "200Gi"
-    }
-    access_modes = ["ReadWriteMany"]
-    persistent_volume_source {
-      azure_file {
-        read_only   = false
-        secret_name = "${var.sa_name}-${var.environment}-filestorage"
-        share_name  = var.share_name
-      }
-    }
-  }
-}
-
