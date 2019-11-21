@@ -25,6 +25,9 @@ resource "azuread_service_principal_password" "service_principal_password" {
 }
 
 resource "random_string" "password" {
-  length           = 16
-  special          = false
+  length      = 16
+  min_lower   = 1
+  min_numeric = 1
+  min_upper   = 1
+  special     = false
 }
