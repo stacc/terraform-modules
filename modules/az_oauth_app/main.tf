@@ -1,5 +1,5 @@
-resource "azuread_application" "flow" {
-  name       = "${var.name}-${var.environment}_flow_client"
+resource "azuread_application" "application" {
+  name       = var.name
   reply_urls = var.reply_urls
   type       = "webapp/api"
 
@@ -16,12 +16,12 @@ resource "azuread_application" "flow" {
   }
 }
 
-resource "azuread_service_principal" "flow_client" {
-  application_id = azuread_application.flow.application_id
+resource "azuread_service_principal" "application_client" {
+  application_id = azuread_application.application.application_id
 }
 
-resource "azuread_service_principal_password" "flow_client_password" {
-  service_principal_id = azuread_service_principal.flow_client.id
+resource "azuread_service_principal_password" "application_client_password" {
+  service_principal_id = azuread_service_principal.application_client.id
   value                = random_string.application_client_password.result
   end_date             = timeadd(timestamp(), "87600h") # 10 years
 
@@ -35,6 +35,6 @@ resource "random_string" "application_client_password" {
   special = false
 
   keepers = {
-    service_principal = azuread_service_principal.flow_client.id
+    service_principal = azuread_service_principal.application_client.id
   }
 }
