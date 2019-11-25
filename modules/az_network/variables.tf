@@ -11,3 +11,8 @@ variable "environment" {
 variable "resource_group" {
   description = "The resource group for the network resources to be created in"
 }
+
+variable "address_space" {
+  description = "Address space of vnet"
+  default     = ["10.1.0.0/16"]
+}
