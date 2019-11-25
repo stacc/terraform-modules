@@ -48,6 +48,9 @@ resource "kubernetes_secret" "database_secret" {
   metadata {
     name      = "${var.name}-${var.environment}-db-postgres"
     namespace = "default"
+    labels = {
+      managedBy = "terraform"
+    }
   }
   data = {
     login_host     = azurerm_postgresql_server.server.fqdn
