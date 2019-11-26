@@ -38,9 +38,8 @@ variable "account_name_suffix" {
 
 variable "database_names" {
   description = "List of the database names"
-
-  # type        = list(string)
-  default = ["test"]
+  type        = list(string)
+  default     = [""]
 }
 
 variable "unique_key" {
