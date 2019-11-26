@@ -20,7 +20,7 @@ resource "azurerm_postgresql_server" "server" {
 
   storage_profile {
     storage_mb            = var.database_storage
-    backup_retention_days = 7
+    backup_retention_days = var.backup_retention_days
     geo_redundant_backup  = "Disabled"
   }
 
