@@ -39,7 +39,7 @@ variable "account_name_suffix" {
 variable "database_names" {
   description = "List of the database names"
   type        = list(string)
-  default     = [""]
+  default     = []
 }
 
 variable "unique_key" {
@@ -55,4 +55,3 @@ variable "capabilities" {
 
 variable "kubernetes_cluster" {
 }
-
