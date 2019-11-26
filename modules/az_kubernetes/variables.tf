@@ -32,10 +32,6 @@ variable "resource_group" {
   description = "The resource group for the Azure Kubernetes Service to be created in"
 }
 
-variable "public_ip_rg" {
-  description = "The resource group of the public IP to be used"
-}
-
 variable "vnet" {
   description = "The virtual network for the Azure Kubernetes Service to be created in"
 }
