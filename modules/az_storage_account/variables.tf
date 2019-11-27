@@ -25,11 +25,9 @@ variable "storage_containers" {
 }
 
 variable "account_kind" {
-  default = "Storage"
+  default = "StorageV2"
 }
 
 variable "enable_https_traffic_only" {
-  default = false
+  default = true
 }
-
-
