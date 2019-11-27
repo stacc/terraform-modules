@@ -31,3 +31,7 @@ variable "account_kind" {
 variable "enable_https_traffic_only" {
   default = true
 }
+
+variable "container_access_type" {
+  default = "private"
+}
