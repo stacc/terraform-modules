@@ -8,6 +8,6 @@ variable "environment" {
   default     = "test-1"
 }
 
-variable "group_object_id" {
-  description = "Object ID of AD group to add pipeline service principal to"
-}
+# variable "group_object_id" {
+#   description = "Object ID of AD group to add pipeline service principal to"
+# }

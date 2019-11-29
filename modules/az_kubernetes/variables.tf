@@ -78,6 +78,6 @@ variable "load_balancer_sku" {
 
 variable "service_principal" {}
 
-variable "aks_rbac" {}
+# variable "aks_rbac" {}
 
-variable "group_cluster_admins_id" {}
+# variable "group_cluster_admins_id" {}

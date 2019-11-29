@@ -52,11 +52,11 @@ resource "azurerm_kubernetes_cluster" "kubernetes" {
 
   role_based_access_control {
     enabled = true
-    azure_active_directory {
-      server_app_id     = var.aks_rbac.server_id
-      server_app_secret = var.aks_rbac.server_secret
-      client_app_id     = var.aks_rbac.client_id
-    }
+    # azure_active_directory {
+    #   server_app_id     = var.aks_rbac.server_id
+    #   server_app_secret = var.aks_rbac.server_secret
+    #   client_app_id     = var.aks_rbac.client_id
+    # }
   }
 
   network_profile {
