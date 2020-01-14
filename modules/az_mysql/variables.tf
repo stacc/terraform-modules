@@ -12,10 +12,6 @@ variable "environment" {
   default     = "test-1"
 }
 
-variable "vnet" {
-  description = "The virtual network postgres will be created in"
-}
-
 variable "kubernetes_cluster" {
 }
 
@@ -44,4 +40,9 @@ variable "database_storage" {
 variable "database_capacity" {
   description = "Number of CPU's for the database server"
   default     = 2
+}
+
+variable "backup_retention_days" {
+  description = "Number of backup retention days"
+  default     = 7
 }
