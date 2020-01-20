@@ -25,5 +25,5 @@ variable "cr_sku" {
 variable "cr_georeplication_locations" {
   description = "List georeplication locations"
   type        = list(string)
-  default     = [""]
+  default     = []
 }
