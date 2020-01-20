@@ -16,3 +16,8 @@ variable "cr_name" {
   description = "The name of the container registry"
   default     = "stacc"
 }
+
+variable "cr_sku" {
+  description = "The sku of the container registry"
+  default     = "Standard"
+}
