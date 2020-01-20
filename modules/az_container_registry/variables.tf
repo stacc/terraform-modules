@@ -21,3 +21,9 @@ variable "cr_sku" {
   description = "The sku of the container registry"
   default     = "Standard"
 }
+
+variable "cr_georeplication_locations" {
+  description = "List georeplication locations"
+  type        = list(string)
+  default     = [""]
+}
