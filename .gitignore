@@ -2,3 +2,4 @@
 beconf.tfvars
 .git
 terraform.txt
+.DS_Store
